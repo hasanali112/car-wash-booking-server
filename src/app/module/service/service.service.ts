@@ -13,6 +13,9 @@ const getService = async () => {
 
 const getServiceById = async (_id: string) => {
   const result = await Service.findById(_id)
+  if (!result) {
+    throw new Error('Service  is not found')
+  }
   return result
 }
 
@@ -20,6 +23,23 @@ const updateServiceById = async (_id: string, payload: Partial<TService>) => {
   const result = await Service.findByIdAndUpdate(_id, payload, {
     new: true,
   })
+  if (!result) {
+    throw new Error('Service  is not found')
+  }
+  return result
+}
+
+const deleteServiceById = async (_id: string) => {
+  const result = await Service.findByIdAndUpdate(
+    _id,
+    { isDeleted: true },
+    {
+      new: true,
+    },
+  )
+  if (!result) {
+    throw new Error('Service  is not found')
+  }
   return result
 }
 
@@ -28,4 +48,5 @@ export const serviceService = {
   getServiceById,
   getService,
   updateServiceById,
+  deleteServiceById,
 }

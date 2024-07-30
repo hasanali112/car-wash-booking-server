@@ -13,6 +13,12 @@ routes.post(
 
 routes.get('/:id', serviceController.serviceGetById)
 routes.get('/', serviceController.serviceGet)
-routes.put('/:id', serviceController.serviceUpdateById)
+routes.put(
+  '/:id',
+  schemaValidation(serviceValidation.updateServiceValidation),
+  serviceController.serviceUpdateById,
+)
+
+routes.patch('/:id', serviceController.serviceDeleteById)
 
 export const serviceRoute = routes
