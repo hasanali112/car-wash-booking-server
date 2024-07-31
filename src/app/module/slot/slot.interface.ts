@@ -7,5 +7,5 @@ export type TSlot = {
   date: Date
   startTime: string
   endTime: string
-  isBooked: TBookingStatus
+  isBooked?: TBookingStatus
 }

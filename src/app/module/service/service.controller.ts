@@ -4,7 +4,7 @@ import httpStatus from 'http-status'
 import { catchAsync } from '../../utils/catchAsync'
 import { serviceService } from './service.service'
 
-const serviceCreate = catchAsync(async (req, res, next) => {
+const serviceCreate = catchAsync(async (req, res) => {
   const serviceData = req.body
   const result = await serviceService.createService(serviceData)
   res.status(httpStatus.OK).json({
@@ -15,7 +15,7 @@ const serviceCreate = catchAsync(async (req, res, next) => {
   })
 })
 
-const serviceGet = catchAsync(async (req, res, next) => {
+const serviceGet = catchAsync(async (req, res) => {
   const result = await serviceService.getService()
   res.status(httpStatus.OK).json({
     success: true,
@@ -25,7 +25,7 @@ const serviceGet = catchAsync(async (req, res, next) => {
   })
 })
 
-const serviceGetById = catchAsync(async (req, res, next) => {
+const serviceGetById = catchAsync(async (req, res) => {
   const { id } = req.params
   const result = await serviceService.getServiceById(id)
   res.status(httpStatus.OK).json({
@@ -36,7 +36,7 @@ const serviceGetById = catchAsync(async (req, res, next) => {
   })
 })
 
-const serviceUpdateById = catchAsync(async (req, res, next) => {
+const serviceUpdateById = catchAsync(async (req, res) => {
   const { id } = req.params
   const updateData = req.body
   const result = await serviceService.updateServiceById(id, updateData)
@@ -48,7 +48,7 @@ const serviceUpdateById = catchAsync(async (req, res, next) => {
   })
 })
 
-const serviceDeleteById = catchAsync(async (req, res, next) => {
+const serviceDeleteById = catchAsync(async (req, res) => {
   const { id } = req.params
   const result = await serviceService.deleteServiceById(id)
   res.status(httpStatus.OK).json({
