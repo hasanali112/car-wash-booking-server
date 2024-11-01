@@ -16,19 +16,26 @@ const createSlotIntoDB = async (payload: TSlot) => {
 
   const timeSlots = slotDefine(startTime, endTime, serviceDuration)
 
-  const results = []
+  const isExisSlot = await Slot.findOne({
+    $or: [{ startTime: { $lte: endTime }, endTime: { $gte: startTime } }],
+  })
 
-  for (const slot of timeSlots) {
-    const result = await Slot.create({
-      ...payload,
-      isBooked: bookedStatus.Available,
-      startTime: slot.startTime,
-      endTime: slot.endTime,
-    })
-    results.push(result)
+  if (isExisSlot) {
+    throw new Error('Slot already created. Please choose another time')
+  } else {
+    const results = []
+
+    for (const slot of timeSlots) {
+      const result = await Slot.create({
+        ...payload,
+        isBooked: bookedStatus.Available,
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+      })
+      results.push(result)
+    }
+    return results
   }
-
-  return results
 }
 
 const getSlotIntoDB = async () => {

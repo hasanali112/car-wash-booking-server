@@ -1,21 +1,21 @@
 import config from '../../config'
 import { TUser } from './user.interface'
-import { UserModel } from './user.model'
+import { User } from './user.model'
 import bycrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 const register = async (payload: TUser) => {
-  const user = await UserModel.findOne({ email: payload.email })
+  const user = await User.findOne({ email: payload.email })
   if (user) {
     throw new Error('Email already exist')
   }
 
-  const result = await UserModel.create(payload)
+  const result = await User.create(payload)
   return result
 }
 
 const login = async (payload: TUser) => {
-  const user = await UserModel.findOne({ email: payload.email })
+  const user = await User.findOne({ email: payload.email })
 
   if (!user) {
     throw new Error('Email not found')

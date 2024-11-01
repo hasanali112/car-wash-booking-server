@@ -4,13 +4,15 @@
 import { userService } from './user.service'
 import httpStatus from 'http-status'
 import { catchAsync } from '../../utils/catchAsync'
+import handleRespose from '../../utils/handleResponse'
 
 const registerUser = catchAsync(async (req, res, next) => {
   const data = req.body
   const result = await userService.register(data)
-  res.status(httpStatus.OK).json({
+  handleRespose(res, {
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'User register succesfully',
+    message: 'User register successfully',
     data: result,
   })
 })

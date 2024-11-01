@@ -12,6 +12,7 @@ import cors from 'cors'
 import middlewareRoutes from './app/routes'
 import globalErrorHandler from './app/middleware/globalErrorhandler'
 import httpStatus from 'http-status'
+import notFoundRoutes from './app/middleware/notFoundRoute'
 
 const app: Application = express()
 
@@ -24,6 +25,7 @@ app.use('/api', middlewareRoutes)
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Car wash service is running successfully',
   })
@@ -31,11 +33,6 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(globalErrorHandler)
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(httpStatus.BAD_GATEWAY).json({
-    success: false,
-    statusCode: httpStatus.BAD_GATEWAY,
-  })
-})
+app.use(notFoundRoutes)
 
 export default app
