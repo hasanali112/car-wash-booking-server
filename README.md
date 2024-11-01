@@ -25,16 +25,15 @@ The Car Washing System backend is designed to provide a reliable and secure envi
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/)
-- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
-- [Docker](https://www.docker.com/) (optional for containerized deployment)
-- Database setup (MySQL/PostgreSQL/MongoDB)
+- [npm](https://www.npmjs.com/)
+- Database setup (MongoDB)
 
 ### Steps to Set Up
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/car-washing-system.git
+   git clone https://github.com/hasanali112/car-wash-booking-server.git
    cd car-washing-system
    ```
 
